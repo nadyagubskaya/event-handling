@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+
+
+
+        <style>
+            .container{
+                display: -webkit-flex;
+                display: -moz-flex;
+                display: -ms-flex;
+                display: -o-flex;
+                display: flex;
+            }
+
+            .container__item{
+                height: 50px;
+                width: 50px;
+                border: 1px solid  #000;
+                margin: 10px;
+                cursor: pointer;
+            }
+        </style>
+
+
+
+        <script>
+
+
+            let $container = document.createElement('div'); 
+            $container.className = 'container';
+            document.body.prepend($container);
+
+            //            let $containerItem;
+
+
+
+            for (i = 0; i < 5; i++) {
+                let $containerItem = document.createElement('div')
+                $containerItem.className = 'container__item white';
+                $containerItem.textContent = i;
+                $container.append($containerItem);
+            }    
+
+            let item = document.body.getElementsByClassName('container__item');
+
+
+
+            for (let k = 0; k < item.length; k++){
+
+                item[k].addEventListener('click', function(even) {
+                    let target = event.target; // где был клик?
+
+                    if (target.classList.contains("white")) {
+                        changeColor('white', 'red');
+
+                    } else if (target.classList.contains("red")) {
+                        changeColor('red', 'blue');
+
+                    } else if (target.classList.contains("blue")) {
+                        changeColor('blue', 'yellow');
+
+                    }else if (target.classList.contains("yellow")) {
+                        changeColor('yellow', 'red');
+                    }
+
+                    function changeColor(before, after) {
+                        target.style = "background:" + after;
+                        target.classList.remove(before);
+                        target.classList.add(after); 
+                    }
+
+                    console.log(target, 'target');
+
+                    for (let j = 0; j < item.length; j++){
+                        item[j].addEventListener('click', function(even) {
+                            if (item[j] != target){
+                                $container.append(target); 
+                                
+//                                console.log(j);
+                            } 
+
+                        })
+                    }
+
+                });
+
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+
+    </body>
+</html>
